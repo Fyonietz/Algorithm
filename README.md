@@ -13,8 +13,8 @@
 
 ### BAB 1: BILANGAN DAN BIT — 0/8
 
-- [ ] [Quest 01 — Konversi Biner ke Desimal](./Quest01/)
-- [ ] [Quest 02 — Konversi Desimal ke Biner](./Quest02/)
+- [x] [Quest 01 — Konversi Biner ke Desimal](./Quest01/)
+- [x] [Quest 02 — Konversi Desimal ke Biner](./Quest02/)
 - [ ] [Quest 03 — Hex ke Desimal](./Quest03/)
 - [ ] [Quest 04 — Desimal ke Hex](./Quest04/)
 - [ ] [Quest 05 — Bit Counter (Popcount)](./Quest05/)
