@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASCII Quick Reference</title>
+<style>
+*{box-sizing:border-box}
+body{font:12px Arial,sans-serif;margin:12px;color:#222}
+h3{margin:0 0 8px}
+.wrap{overflow-x:auto}
+table{border-collapse:separate;border-spacing:3px 1px;width:100%;min-width:650px;table-layout:fixed}
+th,td{padding:4px 3px;text-align:center;border:0}
+th{position:sticky;top:0;color:#fff}
+td{border-bottom:1px solid #ddd}
+th:nth-child(3n+1),td:nth-child(3n+1){font-weight:bold}
+th:nth-child(1),th:nth-child(2),th:nth-child(3){background:#3569a8}
+th:nth-child(4),th:nth-child(5),th:nth-child(6){background:#27866b}
+th:nth-child(7),th:nth-child(8),th:nth-child(9){background:#a46b19}
+th:nth-child(10),th:nth-child(11),th:nth-child(12){background:#8057a5}
+th:nth-child(13),th:nth-child(14),th:nth-child(15){background:#bd5964}
+td:nth-child(1),td:nth-child(2),td:nth-child(3){background:#edf4ff}
+td:nth-child(4),td:nth-child(5),td:nth-child(6){background:#eaf7f1}
+td:nth-child(7),td:nth-child(8),td:nth-child(9){background:#fff5e4}
+td:nth-child(10),td:nth-child(11),td:nth-child(12){background:#f4edfb}
+td:nth-child(13),td:nth-child(14),td:nth-child(15){background:#fff0f1}
+.char{font-family:monospace;font-weight:bold}
+input{width:100%;padding:7px;margin-bottom:8px}
+tr.hidden{display:none}
+@media(min-width:900px){body{max-width:1100px;margin:12px auto}}
+</style>
+</head>
+<body>
+<h3>ASCII Quick Reference (0–127)</h3>
+<input id="q" placeholder="Search decimal, character, or name...">
+<div class="wrap">
+<table>
+<thead><tr>
+<th>Dec</th><th>Chr</th><th>Hex</th>
+<th>Dec</th><th>Chr</th><th>Hex</th>
+<th>Dec</th><th>Chr</th><th>Hex</th>
+<th>Dec</th><th>Chr</th><th>Hex</th>
+<th>Dec</th><th>Chr</th><th>Hex</th>
+</tr></thead>
+<tbody id="t"></tbody>
+</table>
+</div>
+<script>
+const names=[
+"NUL","SOH","STX","ETX","EOT","ENQ","ACK","BEL",
+"BS","HT","LF","VT","FF","CR","SO","SI",
+"DLE","DC1","DC2","DC3","DC4","NAK","SYN","ETB",
+"CAN","EM","SUB","ESC","FS","GS","RS","US"
+];
+const t=document.getElementById("t"),rows=[];
+for(let r=0;r<26;r++){
+ const tr=document.createElement("tr");
+ let search="";
+ for(let g=0;g<5;g++){
+  const n=r+g*26;
+  if(n>127){
+   for(let i=0;i<3;i++)tr.appendChild(document.createElement("td"));
+   continue;
+  }
+  const ch=n<32?names[n]:n===32?"SP":n===127?"DEL":String.fromCharCode(n);
+  const vals=[n,n<32||n===127?"·":n===32?"␠":ch,n.toString(16).toUpperCase().padStart(2,"0")];
+  vals.forEach((v,i)=>{
+   const td=document.createElement("td");
+   td.textContent=v;
+   if(i===1)td.className="char";
+   tr.appendChild(td);
+  });
+  search+=`${n} ${ch} ${names[n]||""} ${n.toString(16)} `;
+ }
+ tr.dataset.search=search.toLowerCase();
+ rows.push(tr);
+ t.appendChild(tr);
+}
+document.getElementById("q").addEventListener("input",e=>{
+ const s=e.target.value.toLowerCase();
+ rows.forEach(r=>r.classList.toggle("hidden",!r.dataset.search.includes(s)));
+});
+</script>
+</body>
+</html>
+/html>
