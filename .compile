@@ -1,1 +1,1 @@
-zig build
+zig build -fincremental Quest02 
